@@ -14,7 +14,9 @@ const Provider = ({ children }) => {
     ]); */
     const [state, setState] = useState([{
         id: 0,
-        jugador: '',
+        jugador: ''
+    },
+    {
         winsGamer1: 0,
         winsGamer2: 0 
     }])
