@@ -27,24 +27,30 @@ const Board = () => {
         if (!ganador.victoria) {
             let arrayPosiciones = [...misCajas]
             let nuevasPosiciones = arrayPosiciones.map(x => {
-                if (x.id === id) {
-                    x.square = jugador
-                }
+                if (x.id === id) x.square = jugador
+                
                 return x
             })
-
-
-            console.log(numJugadas, "numJugadas")
-            console.log(numJugadas[0].numeroJugadas, "numJugadas[0].numeroJugadas")
 
             let proxValor = numJugadas[0].numeroJugadas
             proxValor++
             
-            console.log("proxValor: " + proxValor)
-
             setMisCajas(nuevasPosiciones)
             jugador === 'X' ? setJugador('O') : setJugador('X')
-            setGanador({ victoria: comprobarVictoria()[0], gamer: jugador, jugada: comprobarVictoria()[1] })
+            setGanador({    victoria: comprobarVictoria()[0], 
+                            gamer: jugador, 
+                            jugada: comprobarVictoria()[1] 
+            })
+
+            if(comprobarVictoria()[0]){
+                console.log("HE GANADO")
+
+                //POR AQUI LO HE DEJADO, HAY QUE SETEAR QUIEN HA GANADO EN EL CONTEXT (ESTADO)
+                
+                //setEstado(estado => estado, {winsGamer1:2, winsGamer2:5})
+            } 
+
+            //setEstado( estado.push({winGamer1: 1, winGamer2: 4}) )
         }
 
     }
@@ -82,19 +88,19 @@ const Board = () => {
     const reset = () => {
 
         let arrayLimpia = []
-
+        
         for (let i = 0; i <= 8; i++) {
-            console.log(arrayLimpia, " -- arrayLimpia dentro ")
             arrayLimpia = [...arrayLimpia, { id: i, square: null }]
         }
-
-        console.log(arrayLimpia, " -- arrayLimpia Fuera ")
+        
         setMisCajas(arrayLimpia)
         setJugador('X')
         setGanador({ victoria: false, gamer: 'X', jugada: '0' })
-        console.log(disparaReset, "disparaReset antes")
         setDisparaReset(() => true)
-        console.log(disparaReset, "disparaReset despues")
+        
+        
+        
+        setEstado([{id: 0, jugador: "", winsGamer1: 0, winsGamer2: 0}])
 
 
     }

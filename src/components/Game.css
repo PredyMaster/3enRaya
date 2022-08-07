@@ -119,4 +119,35 @@ ol, ul {
 }
 
 
+/* ---------------------------------- Counter -------------------------------------- */
 
+
+.counter{
+  text-align: center;
+  margin: 0 50px;
+}
+
+.counterGamer{
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  font-size: 30px;
+  color: white;
+}
+
+.wins{
+  font-weight:lighter;
+  font-size: 14px;
+  margin: 10px 0 5px;
+  letter-spacing: 2px;
+}
+
+
+
+.numberWins{
+  font-weight: bold;
+  font-size: 25px;
+}

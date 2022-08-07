@@ -12,7 +12,12 @@ const Provider = ({ children }) => {
         {id: 7, jugador: null},
         {id: 8, jugador: null}
     ]); */
-    const [state, setState] = useState([])
+    const [state, setState] = useState([{
+        id: 0,
+        jugador: '',
+        winsGamer1: 0,
+        winsGamer2: 0 
+    }])
     return (
         <AppContext.Provider value={[state, setState]}>
             {children}
