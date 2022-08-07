@@ -2,46 +2,36 @@ import { useState, useRef, useContext } from 'react'
 import {AppContext} from '../provider/provider'
 
 
-const Square = (props) => {
+const Square = ({ value, square, actualiza, jugador, ganador, numJugadas }) => {
     const [jugadas, setJugadas] = useContext(AppContext)
     const [newvalue, setnewValue] = useState({value: '' })
     const [error, setError] = useState(false)
-    const [hacerReset] = useState(props.reset)
-    const ref = useRef(props.reset)
 
+    const setPosition = () => {
+        setnewValue({value: jugador})
 
-
-
-
-
-    const setPosition = (props) => {
-        setnewValue({value: props.jugador})
-
-        let num = props.value
-
-        console.log(props.value, typeof(props.value))
-
+        let num = value
+    
         let newArray = [...jugadas]
-        newArray[num] = { id: props.value, jugador: props.jugador }
+        console.log(jugadas, " jugadas ")
+        console.log(newArray, " newArray ")
+        newArray[num] = { id: value, jugador: jugador, winsGamer1: jugadas[0].winsGamer1, winsGamer2: jugadas[0].winsGamer2 }
         setJugadas(newArray)
        
-        if(props.numJugadas[0] === 8){
+        if(numJugadas[0] === 8){
             console.log("TABLAS");
         }
     }
 
 
-
-
     const move = e => {
 
         //Compruebo si es el ganador
-        if(!props.ganador.victoria){
-            console.log(props.square, " ------- props.square ")
+        if(!ganador.victoria){
             
-            if(props.square === null){
-                setPosition(props);
-                props.actualiza(props.value)
+            if(square === null){
+                setPosition();
+                actualiza(value)
 
             }else{
                 setError(true);
@@ -52,16 +42,15 @@ const Square = (props) => {
                 quitarError();
             }
 
-        }else{
-            //Es ganador???
-            console.log(props.ganador.jugada)
         }
         
     }
 
     return(
         <button className={!error ? 'square' : 'square square_BorderError'} onClick={ e => move(e) }>
-            <span className={newvalue.value==='X' ? 'jugador1ICON' : 'jugador2ICON'}>{newvalue.value}</span>
+            <span className={newvalue.value==='X' ? 'jugador1ICON' : 'jugador2ICON'}>
+                { !!jugadas[value]?.jugador ? jugadas[value].jugador : null }
+            </span>
         </button>
     )
 }
