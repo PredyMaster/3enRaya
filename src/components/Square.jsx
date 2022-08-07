@@ -15,7 +15,7 @@ const Square = ({ value, square, actualiza, jugador, ganador, numJugadas }) => {
         let newArray = [...jugadas]
         console.log(jugadas, " jugadas ")
         console.log(newArray, " newArray ")
-        newArray[num] = { id: value, jugador: jugador, winsGamer1: jugadas[0].winsGamer1, winsGamer2: jugadas[0].winsGamer2 }
+        newArray[0][num] = { id: value, jugador: jugador }
         setJugadas(newArray)
        
         if(numJugadas[0] === 8){
@@ -49,7 +49,7 @@ const Square = ({ value, square, actualiza, jugador, ganador, numJugadas }) => {
     return(
         <button className={!error ? 'square' : 'square square_BorderError'} onClick={ e => move(e) }>
             <span className={newvalue.value==='X' ? 'jugador1ICON' : 'jugador2ICON'}>
-                { !!jugadas[value]?.jugador ? jugadas[value].jugador : null }
+                { !!jugadas[0][value]?.jugador ? jugadas[0][value].jugador : null }
             </span>
         </button>
     )

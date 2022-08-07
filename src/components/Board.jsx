@@ -36,19 +36,30 @@ const Board = () => {
             proxValor++
             
             setMisCajas(nuevasPosiciones)
+
+
+            if(comprobarVictoria()[0]){
+                console.log("HE GANADO Y SOY " + jugador)
+
+                let newArray = [...estado]
+                
+                let ArrayGanador = jugador === 'X' ? 
+                {winsGamer1: newArray[1].winsGamer1 + 1, winsGamer2: newArray[1].winsGamer2} 
+                : {winsGamer1: newArray[1].winsGamer1, winsGamer2: newArray[1].winsGamer2 +1} 
+                newArray[1] = ArrayGanador
+                
+                console.log(ArrayGanador, " ArrayGanador ")
+
+                setEstado(newArray)
+                
+            } 
+
             jugador === 'X' ? setJugador('O') : setJugador('X')
             setGanador({    victoria: comprobarVictoria()[0], 
                             gamer: jugador, 
                             jugada: comprobarVictoria()[1] 
             })
 
-            if(comprobarVictoria()[0]){
-                console.log("HE GANADO")
-
-                //POR AQUI LO HE DEJADO, HAY QUE SETEAR QUIEN HA GANADO EN EL CONTEXT (ESTADO)
-                
-                //setEstado(estado => estado, {winsGamer1:2, winsGamer2:5})
-            } 
 
             //setEstado( estado.push({winGamer1: 1, winGamer2: 4}) )
         }
@@ -99,8 +110,9 @@ const Board = () => {
         setDisparaReset(() => true)
         
         
-        
-        setEstado([{id: 0, jugador: "", winsGamer1: 0, winsGamer2: 0}])
+        let newArray = [...estado]
+        newArray[0] = {id: 0, jugador: "", winsGamer1: 0, winsGamer2: 0}
+        setEstado(newArray)
 
 
     }
